@@ -1,0 +1,560 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viralo - AI Social Media Automation Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        danger: '#EF4444'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-inter">
+    <!-- @COMPONENT: Sidebar [navigation, user profile, platform connections] -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col">
+            <!-- Logo -->
+            <div class="p-6 border-b border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-slate-800">Viralo</h1>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg bg-primary text-white">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-slate-600 hover:bg-slate-100">
+                            <i class="fas fa-upload"></i>
+                            <span>Content Upload</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-slate-600 hover:bg-slate-100">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Processing</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-slate-600 hover:bg-slate-100">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-slate-600 hover:bg-slate-100">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-slate-600 hover:bg-slate-100">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Connected Platforms -->
+            <div class="p-4 border-t border-slate-200">
+                <h3 class="text-sm font-semibold text-slate-700 mb-3">Connected Platforms</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-green-50">
+                        <div class="flex items-center space-x-2">
+                            <i class="fab fa-instagram text-pink-500"></i>
+                            <span class="text-sm">Instagram</span>
+                        </div>
+                        <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-green-50">
+                        <div class="flex items-center space-x-2">
+                            <i class="fab fa-facebook text-blue-600"></i>
+                            <span class="text-sm">Facebook</span>
+                        </div>
+                        <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-green-50">
+                        <div class="flex items-center space-x-2">
+                            <i class="fab fa-twitter text-blue-400"></i>
+                            <span class="text-sm">Twitter</span>
+                        </div>
+                        <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-red-50">
+                        <div class="flex items-center space-x-2">
+                            <i class="fab fa-linkedin text-blue-700"></i>
+                            <span class="text-sm">LinkedIn</span>
+                        </div>
+                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Profile -->
+            <div class="p-4 border-t border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <!-- Professional headshot of a young entrepreneur -->
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100" alt="User profile" class="w-10 h-10 rounded-full object-cover">
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-slate-800" data-bind="user.name">Alex Johnson</p>
+                        <p class="text-xs text-slate-500" data-bind="user.plan">Pro Plan</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-slate-400 text-sm"></i>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- @COMPONENT: Header [search, notifications, user actions] -->
+            <header class="bg-white shadow-sm border-b border-slate-200 p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Dashboard</h2>
+                        <p class="text-slate-600">AI-powered social media automation in action</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="search" placeholder="Search content..." class="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+                            <i class="fas fa-search absolute left-3 top-3 text-slate-400"></i>
+                        </div>
+                        <button class="relative p-2 text-slate-600 hover:text-slate-800">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 w-5 h-5 bg-danger text-white text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center space-x-2">
+                            <i class="fas fa-plus"></i>
+                            <span>Upload Content</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: Header -->
+
+            <!-- @COMPONENT: MainDashboard [metrics, workflows, content processing] -->
+            <main class="flex-1 overflow-y-auto p-6">
+                <!-- Metrics Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-600">Total Followers</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="metrics.totalFollowers">127.5K</p>
+                                <p class="text-sm text-secondary flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    +12.3% this week
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-600">Engagement Rate</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="metrics.engagementRate">8.7%</p>
+                                <p class="text-sm text-secondary flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    +2.1% this week
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-heart text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-600">Posts This Week</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="metrics.postsThisWeek">24</p>
+                                <p class="text-sm text-slate-500">Automated posting</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-calendar text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-600">AI Processing</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="metrics.aiProcessing">94%</p>
+                                <p class="text-sm text-accent flex items-center">
+                                    <i class="fas fa-robot mr-1"></i>
+                                    Active 24/7
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-brain text-yellow-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- AI Workflow Status -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-slate-800">AI Workflow Status</h3>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                                <i class="fas fa-circle text-green-500 mr-1"></i>
+                                Active
+                            </span>
+                        </div>
+
+                        <!-- Workflow Steps -->
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-slate-800">Content Analysis</h4>
+                                    <p class="text-sm text-slate-600">15 images and 3 videos processed</p>
+                                </div>
+                                <span class="text-sm text-secondary font-medium">Completed</span>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-cog fa-spin text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-slate-800">AI Enhancement</h4>
+                                    <p class="text-sm text-slate-600">Applying filters, adjusting colors, and optimizing quality</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-slate-200 rounded-full">
+                                        <div class="w-3/4 h-2 bg-primary rounded-full"></div>
+                                    </div>
+                                    <span class="text-sm text-primary font-medium">75%</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-slate-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-slate-800">Caption & Hashtag Generation</h4>
+                                    <p class="text-sm text-slate-600">Creating trending captions with optimized hashtags</p>
+                                </div>
+                                <span class="text-sm text-slate-500 font-medium">Pending</span>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-share-alt text-slate-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-slate-800">Auto Publishing</h4>
+                                    <p class="text-sm text-slate-600">Schedule and post to connected platforms</p>
+                                </div>
+                                <span class="text-sm text-slate-500 font-medium">Queued</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Upload Zone -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Quick Upload</h3>
+                        
+                        <!-- Upload Area -->
+                        <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer mb-4" data-implementation="Implement drag-and-drop file upload">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 mb-4"></i>
+                            <p class="text-slate-600 mb-2">Drag & drop your content here</p>
+                            <p class="text-sm text-slate-500">or click to browse files</p>
+                            <button class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-700">
+                                Choose Files
+                            </button>
+                        </div>
+
+                        <!-- Recent Uploads -->
+                        <div class="space-y-3">
+                            <h4 class="text-sm font-semibold text-slate-700">Recent Uploads</h4>
+                            
+                            <!-- @MAP: recentUploads.map(upload => ( -->
+                            <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg" data-mock="true">
+                                <!-- Vibrant sunset landscape photo -->
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Uploaded content thumbnail" class="w-12 h-12 rounded-lg object-cover">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-800" data-bind="upload.filename">sunset_beach.jpg</p>
+                                    <p class="text-xs text-slate-500" data-bind="upload.status">Processing...</p>
+                                </div>
+                                <div class="w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                                    <i class="fas fa-cog fa-spin text-white text-xs"></i>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg" data-mock="true">
+                                <!-- Modern city architecture at night -->
+                                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Uploaded content thumbnail" class="w-12 h-12 rounded-lg object-cover">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-800" data-bind="upload.filename">city_lights.mp4</p>
+                                    <p class="text-xs text-secondary" data-bind="upload.status">Ready to post</p>
+                                </div>
+                                <div class="w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Enhancement Preview & Posting Schedule -->
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+                    <!-- AI Enhancement Preview -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">AI Enhancement Preview</h3>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Before -->
+                            <div>
+                                <h4 class="text-sm font-medium text-slate-700 mb-2">Before</h4>
+                                <!-- Raw unedited travel photo of mountains -->
+                                <img src="https://pixabay.com/get/g39dcbc1df6216c1205f9581354bac2b64c919559917cc826a1ab0cecf5c68ac1a3633a98aa5639f4245f2b82bebc6c107fde8e0c6c7f9ceed8f2ab208a07c141_1280.jpg" alt="Original unprocessed image" class="w-full h-48 object-cover rounded-lg border-2 border-slate-200">
+                            </div>
+                            
+                            <!-- After -->
+                            <div>
+                                <h4 class="text-sm font-medium text-slate-700 mb-2">After AI Enhancement</h4>
+                                <!-- Enhanced vibrant mountain landscape -->
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300" alt="AI enhanced image with better colors and lighting" class="w-full h-48 object-cover rounded-lg border-2 border-primary">
+                            </div>
+                        </div>
+
+                        <!-- Enhancement Details -->
+                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                            <h5 class="text-sm font-semibold text-slate-800 mb-2">AI Enhancements Applied:</h5>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i>Enhanced brightness by 15%</li>
+                                <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i>Improved contrast and saturation</li>
+                                <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i>Applied cinematic color grading</li>
+                                <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i>Optimized for social media dimensions</li>
+                            </ul>
+                        </div>
+
+                        <!-- Generated Caption -->
+                        <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                            <h5 class="text-sm font-semibold text-slate-800 mb-2">AI Generated Caption:</h5>
+                            <p class="text-sm text-slate-700 italic" data-bind="aiCaption">"Chasing sunsets and mountain peaks 🌄✨ Sometimes the best therapy is a good view and fresh mountain air. Nature never fails to remind us how beautiful life can be! 🏔️"</p>
+                            <p class="text-xs text-slate-500 mt-2" data-bind="aiHashtags">#mountains #sunset #nature #travel #hiking #adventure #landscape #peace #mindfulness #outdoor</p>
+                        </div>
+                    </div>
+
+                    <!-- Posting Schedule -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-slate-800">Automated Posting Schedule</h3>
+                            <span class="px-3 py-1 bg-secondary text-white text-sm font-medium rounded-full">
+                                24/7 Active
+                            </span>
+                        </div>
+
+                        <!-- Optimal Posting Times -->
+                        <div class="mb-6">
+                            <h4 class="text-sm font-semibold text-slate-700 mb-3">AI-Optimized Posting Times</h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 bg-blue-50 rounded-lg">
+                                    <p class="text-sm font-medium text-slate-800">Instagram</p>
+                                    <p class="text-xs text-slate-600">9:00 AM, 2:00 PM, 7:00 PM</p>
+                                </div>
+                                <div class="p-3 bg-blue-50 rounded-lg">
+                                    <p class="text-sm font-medium text-slate-800">Facebook</p>
+                                    <p class="text-xs text-slate-600">11:00 AM, 3:00 PM, 8:00 PM</p>
+                                </div>
+                                <div class="p-3 bg-blue-50 rounded-lg">
+                                    <p class="text-sm font-medium text-slate-800">Twitter</p>
+                                    <p class="text-xs text-slate-600">8:00 AM, 12:00 PM, 6:00 PM</p>
+                                </div>
+                                <div class="p-3 bg-red-50 rounded-lg">
+                                    <p class="text-sm font-medium text-slate-800">LinkedIn</p>
+                                    <p class="text-xs text-red-600">Disconnected</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Posts -->
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-700 mb-3">Upcoming Posts</h4>
+                            <div class="space-y-3">
+                                <!-- @MAP: upcomingPosts.map(post => ( -->
+                                <div class="flex items-center space-x-3 p-3 border border-slate-200 rounded-lg" data-mock="true">
+                                    <!-- Modern coffee shop interior -->
+                                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=60&h=60" alt="Scheduled post thumbnail" class="w-10 h-10 rounded object-cover">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-slate-800" data-bind="post.title">Coffee shop vibes</p>
+                                        <p class="text-xs text-slate-500" data-bind="post.schedule">Today at 2:00 PM</p>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <i class="fab fa-instagram text-pink-500"></i>
+                                        <i class="fab fa-facebook text-blue-600"></i>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-3 p-3 border border-slate-200 rounded-lg" data-mock="true">
+                                    <!-- Fresh healthy meal preparation -->
+                                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=60&h=60" alt="Scheduled post thumbnail" class="w-10 h-10 rounded object-cover">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-slate-800" data-bind="post.title">Healthy lunch prep</p>
+                                        <p class="text-xs text-slate-500" data-bind="post.schedule">Today at 7:00 PM</p>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <i class="fab fa-instagram text-pink-500"></i>
+                                        <i class="fab fa-twitter text-blue-400"></i>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-3 p-3 border border-slate-200 rounded-lg" data-mock="true">
+                                    <!-- Modern workspace setup with laptop -->
+                                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=60&h=60" alt="Scheduled post thumbnail" class="w-10 h-10 rounded object-cover">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-slate-800" data-bind="post.title">Workspace inspiration</p>
+                                        <p class="text-xs text-slate-500" data-bind="post.schedule">Tomorrow at 9:00 AM</p>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <i class="fab fa-facebook text-blue-600"></i>
+                                        <i class="fab fa-twitter text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth Analytics -->
+                <div class="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-slate-800">Growth Analytics</h3>
+                        <select class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Chart Placeholder -->
+                        <div class="h-64 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-chart-line text-4xl text-indigo-500 mb-2"></i>
+                                <p class="text-slate-600">Interactive Analytics Chart</p>
+                                <p class="text-sm text-slate-500">Chart.js implementation</p>
+                            </div>
+                        </div>
+
+                        <!-- Performance Metrics -->
+                        <div class="space-y-4">
+                            <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-slate-600">Best Performing Post</p>
+                                        <p class="font-semibold text-slate-800" data-bind="analytics.bestPost">Mountain sunset photo</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-secondary" data-bind="analytics.bestEngagement">847</p>
+                                        <p class="text-xs text-slate-500">engagements</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-slate-600">Avg. Daily Reach</p>
+                                        <p class="font-semibold text-slate-800" data-bind="analytics.dailyReach">12.4K</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-primary" data-bind="analytics.reachGrowth">+18%</p>
+                                        <p class="text-xs text-slate-500">vs last week</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-slate-600">AI Optimization Score</p>
+                                        <p class="font-semibold text-slate-800" data-bind="analytics.optimizationScore">94/100</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-purple-600" data-bind="analytics.timesSaved">47h</p>
+                                        <p class="text-xs text-slate-500">time saved</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- @END_COMPONENT: MainDashboard -->
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement real-time data updates, drag-and-drop functionality, and chart visualizations
+        // TODO: Connect to social media APIs for actual posting automation
+        // TODO: Implement AI processing workflow with progress tracking
+        
+        (function() {
+            // Mock real-time updates
+            function updateMetrics() {
+                // TODO: Replace with actual API calls
+                console.log('Updating metrics from API...');
+            }
+
+            // Mock file upload handling
+            function handleFileUpload(files) {
+                // TODO: Implement actual file upload with progress tracking
+                console.log('Processing uploaded files:', files);
+            }
+
+            // Mock workflow status updates
+            function updateWorkflowStatus() {
+                // TODO: Connect to AI processing pipeline
+                console.log('Checking AI workflow status...');
+            }
+
+            // Initialize dashboard
+            setInterval(updateMetrics, 30000); // Update every 30 seconds
+            setInterval(updateWorkflowStatus, 10000); // Update every 10 seconds
+        })();
+    </script>
+</body>
+</html>
